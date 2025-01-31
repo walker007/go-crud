@@ -2,6 +2,12 @@ package database
 
 import "errors"
 
+func NewApplication[T Insertable]() *DBApplication[T] {
+	return &DBApplication[T]{
+		data: make(map[uint64]T),
+	}
+}
+
 type Insertable interface {
 	SetId(id uint64)
 	GetId() uint64
