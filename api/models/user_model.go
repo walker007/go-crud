@@ -2,9 +2,9 @@ package models
 
 type User struct {
 	ID        uint64 `json:"id"`
-	FirstName string
-	LastName  string
-	Biography string
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Biography string `json:"biography"`
 }
 
 func (u *User) SetId(id uint64) {

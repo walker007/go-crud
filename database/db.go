@@ -1,6 +1,8 @@
 package database
 
-import "errors"
+import (
+	"errors"
+)
 
 func NewApplication[T Insertable]() *DBApplication[T] {
 	return &DBApplication[T]{
@@ -19,8 +21,13 @@ type DBApplication[T Insertable] struct {
 
 var InMemoryDbNotFoundError = errors.New("the resource wasn't found")
 
-func (d *DBApplication[T]) GetAll() map[uint64]T {
-	return d.data
+func (d *DBApplication[T]) GetAll() []T {
+	result := make([]T, 0, len(d.data))
+
+	for _, data := range d.data {
+		result = append(result, data)
+	}
+	return result
 }
 
 func (d *DBApplication[T]) GetById(id uint64) (T, error) {
